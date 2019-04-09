@@ -5,7 +5,11 @@ from imagekit.processors import ResizeToFill
 class Post(models.Model):
     content = models.CharField(max_length=100)
     #image = models.ImageField(blank=True)
-    image = ProcessedImageField(
+    
+                
+class Image(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    file = ProcessedImageField(
                 upload_to='posts/images',
                 processors=[ResizeToFill(600,600)],
                 format='JPEG',
